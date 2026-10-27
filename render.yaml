@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: q-verify
+    runtime: docker
+    plan: starter            # persistent disks need a paid plan
+    healthCheckPath: /_stcore/health
+    disk: {name: qv-data, mountPath: /data, sizeGB: 1}
+    envVars:
+      - {key: QV_DEMO, value: "0"}
+      - {key: QV_SEED_DEMO, value: "1"}
+      - {key: QV_KEY_PASSPHRASE, generateValue: true}
+      - {key: QV_PW_ADMIN1, sync: false}
+      - {key: QV_PW_REVIEWER1, sync: false}
+      - {key: QV_PW_AUDITOR1, sync: false}
+      - {key: QV_PW_APPLICANT1, sync: false}

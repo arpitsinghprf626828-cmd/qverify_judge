@@ -1,0 +1,27 @@
+{
+  "rules_version": "demo-2026-v2 (configure from the AICTE Approval Process Handbook)",
+  "category_checklists": {"Extension of Approval (EoA)": ["affidavit", "noc", "accreditation", "fire_safety", "building"]},
+  "settings": {"ocr_lang": "eng", "ocr_min_conf": 60, "name_match_threshold": 85, "phash_threshold": 8,
+               "gps_max_km": 5, "blur_min": 60, "min_photo_side": 400, "warn_days": 60, "ml_min_confidence": 0.6},
+  "rules": {
+    "R01": {"enabled": true, "severity": "High",   "text": "Required document for this application category is missing", "handbook_ref": "Handbook: document checklist (configure clause)"},
+    "R02": {"enabled": true, "severity": "Medium", "text": "Document unreadable, low OCR confidence or unclassifiable: manual review", "handbook_ref": "Process: manual review of unreadable evidence"},
+    "R03": {"enabled": true, "severity": "High",   "text": "Document validity period has ended", "handbook_ref": "Handbook: validity of statutory documents (configure clause)"},
+    "R04": {"enabled": true, "severity": "Low",    "text": "Document expires within the warning window", "handbook_ref": "Process: early-warning alert"},
+    "R05": {"enabled": true, "severity": "High",   "text": "Institution ID in document differs from application form", "handbook_ref": "Handbook: identity consistency (configure clause)"},
+    "R06": {"enabled": true, "severity": "Medium", "text": "Institution name in document differs from application form", "handbook_ref": "Handbook: identity consistency (configure clause)"},
+    "R07": {"enabled": true, "severity": "High",   "text": "Intake in document differs from intake claimed in form", "handbook_ref": "Handbook: approved intake (configure clause)"},
+    "R08": {"enabled": true, "severity": "High",   "text": "Intake claimed in form differs from AICTE record (approved intake)", "handbook_ref": "Handbook: approved intake (configure clause)"},
+    "R09": {"enabled": true, "severity": "Medium", "text": "Identical file uploaded more than once (duplicate)", "handbook_ref": "Process: duplicate evidence"},
+    "R10": {"enabled": true, "severity": "Medium", "text": "PDF metadata anomaly (edited long after creation / image-editing software)", "handbook_ref": "Process: document authenticity indicators"},
+    "R11": {"enabled": true, "severity": "High",   "text": "Issuer verification result is not 'Verified' (see status)", "handbook_ref": "Process: verification with issuing authority"},
+    "R12": {"enabled": true, "severity": "Medium", "text": "AICTE record shows unpaid TER or open deficiency", "handbook_ref": "Handbook: TER / deficiency status (configure clause)"},
+    "R13": {"enabled": true, "severity": "Medium", "text": "Irregular dates (issue date after expiry or in the future)", "handbook_ref": "Process: document authenticity indicators"},
+    "R14": {"enabled": true, "severity": "High",   "text": "Photo visually matches an image submitted by a different institution (perceptual hash)", "handbook_ref": "Process: infrastructure evidence authenticity"},
+    "R15": {"enabled": true, "severity": "Medium", "text": "Photo GPS location is far from the declared campus location", "handbook_ref": "Process: infrastructure evidence verification"},
+    "R16": {"enabled": true, "severity": "Low",    "text": "Photo quality too low to serve as evidence (blur / resolution)", "handbook_ref": "Process: request additional evidence"},
+    "R17": {"enabled": true, "severity": "High",   "text": "QR code reference differs from the printed reference number", "handbook_ref": "Process: verification via QR / reference number"},
+    "R18": {"enabled": true, "severity": "Medium", "text": "PDF forensic indicator (mixed fonts in a data field / multiple incremental saves)", "handbook_ref": "Process: document authenticity indicators"},
+    "R19": {"enabled": true, "severity": "Low",    "text": "ML anomaly detector flags unusual file characteristics (advisory)", "handbook_ref": "Advisory model - human review only"}
+  }
+}

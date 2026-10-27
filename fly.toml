@@ -1,0 +1,32 @@
+# Deploy:  fly launch --no-deploy --copy-config  ->  fly volumes create qv_data --size 1 --region bom
+#          fly secrets set QV_KEY_PASSPHRASE=... QV_PW_ADMIN1=... QV_PW_REVIEWER1=... QV_PW_AUDITOR1=... QV_PW_APPLICANT1=... QV_JUDGE_PASSWORD=...
+#          fly deploy
+app = "q-verify-CHANGE-ME"      # must be globally unique, e.g. q-verify-arpit
+primary_region = "bom"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  QV_DEMO = "0"
+  QV_SEED_DEMO = "1"
+  PORT = "8501"
+
+[mounts]
+  source = "qv_data"
+  destination = "/data"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "2gb"
+
+[http_service]
+  internal_port = 8501
+  force_https = true
+  auto_stop_machines = "off"
+  min_machines_running = 1
+  [[http_service.checks]]
+    path = "/_stcore/health"
+    interval = "30s"
+    timeout = "5s"
+    grace_period = "180s"

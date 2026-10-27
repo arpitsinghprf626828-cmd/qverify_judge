@@ -1,0 +1,12 @@
+# One-command local demo for evaluators (no .env needed):  docker compose -f docker-compose.demo.yml up --build
+# Opens http://localhost:8501 with demo accounts shown on the login page. Synthetic data only. Do NOT expose this to the internet.
+services:
+  qverify:
+    build: .
+    ports: ["8501:8501"]
+    environment:
+      QV_DEMO: "1"
+      QV_SEED_DEMO: "1"
+    volumes: ["qv_demo_data:/data"]
+volumes:
+  qv_demo_data:

@@ -1,0 +1,22 @@
+# Production: Caddy terminates HTTPS (automatic Let's Encrypt certificate for $DOMAIN) and proxies to the app. Only 80/443 are public.
+# Caddy receives ONLY the two values it needs, never the app's passwords or key passphrase.
+services:
+  qverify:
+    build: .
+    env_file: [.env]
+    volumes: ["qv_data:/data"]
+    expose: ["8501"]
+    restart: unless-stopped
+  caddy:
+    image: caddy:2
+    ports: ["80:80", "443:443"]
+    environment:
+      DOMAIN: ${DOMAIN}
+      ACME_EMAIL: ${ACME_EMAIL}
+    volumes: ["./Caddyfile:/etc/caddy/Caddyfile:ro", "caddy_data:/data", "caddy_config:/config"]
+    depends_on: [qverify]
+    restart: unless-stopped
+volumes:
+  qv_data:
+  caddy_data:
+  caddy_config:

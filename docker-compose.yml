@@ -1,0 +1,10 @@
+# Local / simple server run on http://localhost:8501.  For public HTTPS use:  docker compose -f docker-compose.prod.yml up -d --build
+services:
+  qverify:
+    build: .
+    ports: ["8501:8501"]
+    env_file: [.env]
+    volumes: ["qv_data:/data"]
+    restart: unless-stopped
+volumes:
+  qv_data:
